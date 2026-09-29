@@ -1,115 +1,38 @@
-
-import { useEffect, useState } from "react";
-import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [text, setText] = useState("");
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [Quotes, setQuotes] = useState([]);
 
-  // Real-time clock
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
+    fetch("https://dummyjson.com/quotes")
+      .then((response) => response.json())
+      .then((data) => setQuotes(data.quotes))
+      .catch((error) => alert("Error fetching quotes: " + error));
   }, []);
 
-  const time = currentTime.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-
-  const date = currentTime.toLocaleDateString("en-IN", {
-    weekday: "short",
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-
   return (
-    <div className="page">
+    <div className="container">
+      <h2>Quotes</h2>
 
-      {/* TOP RIGHT CLOCK */}
-      <div className="clock">
-        <div className="clock-top">
-          <span className="status"></span>
-          LIVE CLOCK
-        </div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Quote</th>
+            <th>Author</th>
+          </tr>
+        </thead>
 
-        <div className="clock-time">
-          {time}
-        </div>
-
-        <div className="clock-date">
-          {date}
-        </div>
-      </div>
-
-      {/* MAIN CONTENT */}
-      <div className="content">
-
-        <div className="tag">
-          ✨ LIVE TEXT EDITOR
-        </div>
-
-        <h1>
-          Write it.
-          <br />
-          <span>See it.</span>
-        </h1>
-
-        <p className="subtitle">
-          Everything you type appears instantly.
-        </p>
-
-        {/* INPUT */}
-        <div className="editor">
-
-          <div className="editor-header">
-            <span>MESSAGE</span>
-            <span>{text.length} / 200</span>
-          </div>
-
-          <div className="input-box">
-
-            <span className="pencil">✎</span>
-
-            <input
-              type="text"
-              maxLength="200"
-              placeholder="Type something here..."
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-
-            {text && (
-              <button onClick={() => setText("")}>
-                Clear
-              </button>
-            )}
-
-          </div>
-
-        </div>
-
-        {/* OUTPUT */}
-        <div className="output">
-
-          <div className="output-title">
-            <span className="green-dot"></span>
-            LIVE PREVIEW
-          </div>
-
-          <div className={text ? "result has-text" : "result"}>
-            {text || "Start typing to see your text here..."}
-          </div>
-
-        </div>
-
-      </div>
-
+        <tbody>
+          {Quotes.map((row) => (
+            <tr key={row.id}>
+              <td>{row.id}</td>
+              <td>{row.quote}</td>
+              <td>{row.author}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
