@@ -14,41 +14,54 @@ function App() {
     <div className="container">
       <h2>Recipes</h2>
 
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Ingredients</th>
-            <th>Instructions</th>
-            <th>prepTimeMinutes</th>
-            <th>CookTimeMinutes</th>
-            <th>Servings</th>
-            <th>Difficulty</th>
-            <th>Cuisine</th>
-            <th>Calories Per Serving</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {Recipes.map((row) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>{row.ingredients.join(", ")}</td>
-              <td>{row.instructions}</td>
-              <td>{row.prepTimeMinutes}</td>
-              <td>{row.cookTimeMinutes}</td>
-              <td>{row.servings}</td>
-              <td>{row.difficulty}</td>
-              <td>{row.cuisine}</td>
-              <td>{row.caloriesPerServing}</td>
+      <div className="table-responsive">
+        <table className="table table-dark table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Ingredients</th>
+              <th>Instructions</th>
+              <th>Prep Time</th>
+              <th>Cuisine</th>
+              <th>Calories Per Serving</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {Recipes.map((row) => (
+              <tr key={row.id}>
+                <td>{row.id}</td>
+
+                <td>{row.name}</td>
+
+                <td>
+                  <ul>
+                    {row.ingredients.map((ingredient, index) => (
+                      <li key={index}>{ingredient}</li>
+                    ))}
+                  </ul>
+                </td>
+
+                <td>
+                  <ol>
+                    {row.instructions.map((instruction, index) => (
+                      <li key={index}>{instruction}</li>
+                    ))}
+                  </ol>
+                </td>
+
+                <td>{row.prepTimeMinutes} min</td>
+
+                <td>{row.cuisine}</td>
+
+                <td>{row.caloriesPerServing} kcal</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-          
   );
 }
 

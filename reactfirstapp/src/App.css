@@ -1,81 +1,99 @@
-
-* {
-  box-sizing: border-box;
+/* Main container */
+.container {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080914;
+/* Page heading */
+.container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 32px;
+  font-weight: 700;
 }
 
-.page {
-  min-height: 100vh;
+/* Table */
+.table {
   width: 100%;
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 20% 30%, #39206b, transparent 35%),
-    radial-gradient(circle at 80% 70%, #075b65, transparent 35%),
-    #080914;
-  color: white;
+  border-collapse: collapse;
+  vertical-align: middle;
 }
 
-
-/* CLOCK */
-
-.clock {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-
-  width: 240px;
-  padding: 22px;
-
-  background: rgba(20, 24, 45, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
-
-  z-index: 9999;
+/* Table header */
+.table thead th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 15px 10px;
+  white-space: nowrap;
 }
 
-.live {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  color: #22d3ee;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 2px;
+/* Table body */
+.table tbody td {
+  padding: 15px 10px;
+  vertical-align: top;
 }
 
-.live span {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-  background: #22c55e;
-
-  box-shadow: 0 0 12px #22c55e;
+/* Recipe name */
+.table tbody td:nth-child(2) {
+  font-weight: 600;
+  min-width: 180px;
 }
 
-.clock-time {
-  margin-top: 18px;
-
-  font-size: 30px;
-  font-weight: bold;
+/* Ingredients column */
+.table tbody td:nth-child(3) {
+  min-width: 220px;
 }
 
-.clock-date {
-  margin-top: 8px;
-
-  color: #8991a5;
-  font-size: 12px;
+/* Instructions column */
+.table tbody td:nth-child(4) {
+  min-width: 350px;
 }
 
+/* Lists inside table */
+.table td ul {
+  margin: 0;
+  padding-left: 20px;
+}
 
-/* MAIN */
+.table td li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
 
+/* Center small information columns */
+.table tbody td:first-child,
+.table tbody td:nth-child(5),
+.table tbody td:nth-child(6),
+.table tbody td:nth-child(7) {
+  text-align: center;
+}
+
+/* Hover effect */
+.table tbody tr {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  transform: scale(1.005);
+}
+
+/* Responsive table */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container h2 {
+    font-size: 26px;
+  }
+
+  .table {
+    font-size: 14px;
+  }
+
+  .table tbody td:nth-child(3),
+  .table tbody td:nth-child(4) {
+    min-width: 250px;
+  }
+}
